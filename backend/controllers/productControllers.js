@@ -1,7 +1,8 @@
 const Product = require("../models/productModel");
-const ErrorHandler = require("../utils/errorHandler");
+const ErrorHandler = require("../utils/errorHandler").default;
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apiFeatures");
+
 //Create product -- ADMIN
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   req.body.user = req.user.id;
@@ -149,11 +150,11 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     avg += rev.rating;
   });
   const ratings = 0;
-    const numOfReviews = 0;
+  const numOfReviews = 0;
   if (reviews.length !== 0) {
     ratings = avg / reviews.length;
     numOfReviews = reviews.length;
-  } 
+  }
 
   await Product.findByIdAndUpdate(
     req.query.productId,
